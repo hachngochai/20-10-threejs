@@ -53,6 +53,7 @@ và trình duyệt hỗ trợ WebGL2. Khi 3D không khả dụng, các nội dun
 - `css/room3d.css`: giao diện phòng, thanh điều hướng và hiệu ứng chuyển cảnh.
 - `css/world3d.css`: bề mặt, chiều sâu và giao diện các phòng nội dung.
 - `css/fonts.css`, `css/typography.css`, `assets/fonts/`: font cục bộ và hệ chữ dùng chung.
+- `css/memory-desktop.css`: bố cục album phòng 2 rộng hơn trên PC, áp dụng từ 1101px.
 - `bonus.html`, `css/bonus3d.css`, `js/bonus.js`: căn phòng quà đặc biệt.
 - `js/app.js`: điều hướng, tiến trình 4/4, nhạc và hộp thoại.
 - `js/pages.js`: thư, album, lời nhắc, quà và gửi lời nhắn.
