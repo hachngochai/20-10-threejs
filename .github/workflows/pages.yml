@@ -2,7 +2,7 @@ name: Deploy website to GitHub Pages
 
 on:
   push:
-    branches: [main]
+    branches: [master]
   workflow_dispatch:
 
 permissions:
@@ -29,12 +29,13 @@ jobs:
         shell: bash
         run: |
           set -euo pipefail
-          mkdir -p _site/css _site/js/vendor/three _site/assets/photos
+          mkdir -p _site/css _site/js/vendor/three _site/assets/photos _site/assets/fonts
           cp index.html bonus.html piano.mp3 .nojekyll _site/
-          cp css/{global,pages,room3d,world3d,bonus3d}.css _site/css/
+          cp css/{global,pages,room3d,world3d,bonus3d,fonts,typography}.css _site/css/
           cp js/{config,app,pages,room3d,room3d-loader,bonus}.js _site/js/
           cp js/vendor/three/{three.module.js,three.core.js,LICENSE,README.md} _site/js/vendor/three/
           cp assets/photos/memory-*.jpg _site/assets/photos/
+          cp assets/fonts/* _site/assets/fonts/
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:

@@ -1,0 +1,277 @@
+/* A shared editorial type system; the existing room colors and geometry stay in their own stylesheets. */
+:root {
+  --font-display: "Playfair Display", Georgia, serif;
+  --font-body: "Be Vietnam Pro", Arial, sans-serif;
+}
+
+body,
+body.bonus-3d {
+  font-family: var(--font-body);
+  font-weight: 400;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
+body :is(button, a, input, textarea) {
+  font-family: var(--font-body);
+}
+
+/* Spacious serif headlines leave enough room for Vietnamese accents. */
+body :is(.hero-title, .room-copy h2, .letter-hero h2, .memory-title h2, .care-intro h2, .thanks-letter h2, .gift-title h2, .connect-page h2, .final-page h2),
+body .bonus-copy h1 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(44px, 4.5vw, 64px);
+  line-height: 1.16;
+  letter-spacing: -.03em;
+  text-wrap: balance;
+}
+
+body :is(.hero-title, .room-copy h2, .letter-hero h2, .memory-title h2, .care-intro h2, .thanks-letter h2, .gift-title h2, .connect-page h2, .final-page h2) em,
+body .bonus-copy h1 em,
+body .bonus-letter h2 em {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-style: italic;
+  letter-spacing: -.035em;
+}
+
+body .intro-words .hero-title {
+  font-size: clamp(46px, 6.6vw, 90px);
+  line-height: 1.16;
+  letter-spacing: -.035em;
+}
+
+body :is(.letter-hero h2, .care-intro h2) {
+  font-size: clamp(42px, 4.1vw, 58px);
+}
+
+body :is(.connect-page, .final-page) h2 {
+  font-size: clamp(46px, 4.8vw, 66px);
+}
+
+body .room-ui.has-room3d .room-copy h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(38px, 3.8vw, 52px);
+  line-height: 1.16;
+  letter-spacing: -.03em;
+}
+
+body .room-ui.has-room3d .room-copy > p:last-child {
+  font-family: var(--font-body);
+  font-size: 12px;
+  line-height: 1.8;
+}
+
+/* Simple, clear supporting copy contrasts with the expressive headings. */
+body :is(.letter-lead, .memory-title > p:last-child, .care-intro > p:last-child, .thanks-letter > p:not(.kicker), .gift-title > p:last-child, .hero-sub, .connect-page > p:not(.kicker), .final-page > p:not(.kicker)),
+body .bonus-copy > p:last-child {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: 15px;
+  line-height: 1.85;
+  letter-spacing: -.01em;
+  text-wrap: pretty;
+}
+
+body .kicker,
+body .screen :is(.letter-hero, .memory-title, .care-intro, .thanks-letter, .gift-title, .intro-words) .kicker,
+body .bonus-kicker {
+  font-family: var(--font-body);
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 1.8;
+  letter-spacing: .18em;
+}
+
+body .room-ui.has-room3d .room-copy .kicker {
+  font-family: var(--font-body);
+  font-size: 9px;
+  font-weight: 500;
+  line-height: 1.8;
+  letter-spacing: .13em;
+}
+
+/* Reading text uses the Vietnamese sans; personal sign-offs keep the display serif. */
+body .paper-inner h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(28px, 2.7vw, 36px);
+  line-height: 1.25;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+body #letterContent p {
+  font-family: var(--font-body);
+  font-weight: 400;
+  font-size: clamp(17px, 1.4vw, 18px);
+  line-height: 1.85;
+  letter-spacing: -.015em;
+  text-wrap: pretty;
+}
+
+body #letterContent p:first-child:first-letter {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: 3.1em;
+  line-height: .8;
+}
+
+body .letter-signature {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-style: italic;
+  font-size: 24px;
+  line-height: 1.5;
+  letter-spacing: -.02em;
+}
+
+body .letter-signature strong { font-weight: 500; }
+body .paper-topline { font-family: var(--font-body); font-weight: 500; letter-spacing: .14em; }
+body .chibi-rain .chibi-copy { font-family: var(--font-body); font-weight: 500; font-size: 10px; line-height: 1.12; letter-spacing: -.02em; }
+
+body .note-card strong,
+body .gift-tile strong {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -.02em;
+  text-wrap: balance;
+}
+
+body .thanks-door strong,
+body .connect-door strong {
+  font-family: var(--font-display);
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 1.35;
+  letter-spacing: -.02em;
+}
+
+body :is(.thanks-door small, .connect-door span, .gift-tile small, .note-card span) {
+  font-family: var(--font-body);
+  font-weight: 500;
+  line-height: 1.7;
+}
+
+body .hero-photo figcaption {
+  font-family: var(--font-body);
+  font-size: 13px;
+  font-weight: 500;
+  line-height: 1.5;
+  letter-spacing: -.015em;
+}
+
+body .hero-photo figcaption b { font-family: var(--font-body); font-weight: 600; letter-spacing: .08em; }
+
+/* Compact controls remain easy to scan, with calmer letter spacing. */
+body :is(.mini-control, .back-chip, .connect-button, .final-btn, .room-final-door, .hero-enter, .send-note, .bonus-back) {
+  font-family: var(--font-body);
+  font-weight: 600;
+  letter-spacing: .04em;
+  line-height: 1.6;
+}
+
+body .mini-control b { font-weight: 600; }
+body .mini-brand { font-family: var(--font-display); font-size: 23px; font-weight: 500; letter-spacing: -.04em; }
+body :is(.room3d-nav-item, .room3d-hotspot) { font-family: var(--font-body); }
+body .room3d-nav-item :is(.nav-label, .hotspot-copy) { font-family: var(--font-body); font-weight: 500; letter-spacing: .025em; line-height: 1.45; }
+body .room3d-hotspot .hotspot-copy strong { font-family: var(--font-body); font-weight: 600; }
+body :is(.nav-number, .hotspot-number, .room-progress > span, .memory-toolbar) { font-family: var(--font-body); font-weight: 500; font-variant-numeric: tabular-nums; }
+body .mail-seal,
+body .connect-orbit > span,
+body .album-cover b,
+body .room-center-mark { font-family: var(--font-display); font-weight: 500; }
+body .desk-stamp { font-family: var(--font-body); }
+body .completion-card button { font-family: var(--font-body); font-weight: 600; }
+
+body :is(.field input, .field textarea) { font-family: var(--font-body); font-weight: 400; font-size: 15px; line-height: 1.7; letter-spacing: -.01em; }
+body :is(.form-head, .field span, .rating-field > div > span) { font-family: var(--font-body); font-weight: 500; line-height: 1.8; letter-spacing: .06em; }
+body :is(.form-smallprint, .range-labels, .thanks-status, .toast) { font-family: var(--font-body); line-height: 1.8; }
+
+/* Dialog copy keeps a comfortable reading size even when its text is long. */
+body .help-card h3,
+body .completion-card h3,
+body .bonus-letter h2 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(26px, 2.7vw, 36px);
+  line-height: 1.3;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+body .message-card h3 {
+  font-family: var(--font-display);
+  font-weight: 500;
+  font-size: clamp(23px, 2.4vw, 30px);
+  line-height: 1.5;
+  letter-spacing: -.02em;
+  text-wrap: pretty;
+}
+
+body .help-card > p:not(.kicker),
+body .completion-card > p {
+  font-family: var(--font-body);
+  font-size: 14px;
+  font-weight: 400;
+  line-height: 1.85;
+}
+
+/* The standalone gift page shares the same lettering. */
+body .bonus-copy h1 { font-size: clamp(42px, 4.4vw, 62px); line-height: 1.2; }
+body .envelope-paper { font-family: var(--font-display); font-weight: 500; font-size: 25px; line-height: 1.18; letter-spacing: -.02em; }
+body .envelope-paper i { font-family: var(--font-body); font-weight: 500; font-style: normal; }
+body #bonusWish { font-family: var(--font-body); font-weight: 400; font-size: 17px; line-height: 1.85; letter-spacing: -.015em; }
+body .bonus-signature { font-family: var(--font-display); font-weight: 500; font-style: italic; font-size: 23px; line-height: 1.5; letter-spacing: -.02em; }
+body .bonus-signature strong { font-weight: 500; font-size: 28px; }
+body .bonus-letter .bonus-kicker { font-family: var(--font-body); font-weight: 500; letter-spacing: .15em; }
+
+@media (max-width: 1100px) {
+  body :is(.letter-hero h2, .care-intro h2, .thanks-letter h2) { font-size: clamp(42px, 5.5vw, 62px); }
+}
+
+@media (max-width: 699px) {
+  body .intro-words .hero-title { font-size: clamp(36px, 10.4vw, 44px); line-height: 1.2; letter-spacing: -.03em; }
+  body :is(.hero-sub, .bonus-copy > p:last-child) { font-size: 14px; }
+}
+
+@media (max-width: 620px) {
+  body :is(.letter-hero h2, .memory-title h2, .care-intro h2, .thanks-letter h2, .gift-title h2),
+  body :is(.connect-page, .final-page) h2,
+  body .bonus-copy h1 { font-size: clamp(34px, 9.8vw, 42px); line-height: 1.2; letter-spacing: -.03em; }
+  body .room-ui.has-room3d .room-copy h2 { font-size: clamp(30px, 8.5vw, 36px); line-height: 1.18; letter-spacing: -.03em; }
+  body .room-ui.has-room3d .room-copy > p:last-child { font-size: 10px; }
+  body :is(.letter-lead, .memory-title > p:last-child, .care-intro > p:last-child, .thanks-letter > p:not(.kicker), .gift-title > p:last-child, .connect-page > p:not(.kicker), .final-page > p:not(.kicker)) { font-size: 14px; line-height: 1.85; }
+  body .kicker,
+  body .screen :is(.letter-hero, .memory-title, .care-intro, .thanks-letter, .gift-title, .intro-words) .kicker,
+  body .bonus-kicker { font-size: 9px; letter-spacing: .14em; }
+  body .paper-inner h3 { font-size: clamp(26px, 7vw, 30px); line-height: 1.3; }
+  body #letterContent p { font-size: 17px; line-height: 1.85; }
+  body .letter-signature { font-size: 22px; }
+  body .chibi-rain .chibi-copy { font-size: 8.5px; }
+  body .note-card strong,
+  body .gift-tile strong { font-size: 20px; line-height: 1.35; }
+  body .thanks-door strong,
+  body .connect-door strong { font-size: 20px; line-height: 1.4; }
+  body .hero-photo figcaption { font-size: 12px; line-height: 1.45; }
+  body :is(.field input, .field textarea) { font-size: 16px; }
+  body .help-card h3,
+  body .completion-card h3,
+  body .bonus-letter h2 { font-size: 28px; line-height: 1.35; }
+  body .message-card h3 { font-size: 23px; line-height: 1.5; }
+}
+
+@media (max-width: 360px) {
+  body .intro-words .hero-title { font-size: 35px; }
+  body :is(.letter-hero h2, .memory-title h2, .care-intro h2, .thanks-letter h2, .gift-title h2),
+  body :is(.connect-page, .final-page) h2,
+  body .bonus-copy h1 { font-size: 32px; }
+  body .room-ui.has-room3d .room-copy h2 { font-size: 30px; }
+  body .help-card h3,
+  body .completion-card h3,
+  body .bonus-letter h2 { font-size: 25px; }
+}

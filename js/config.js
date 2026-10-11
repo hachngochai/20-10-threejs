@@ -1,6 +1,6 @@
 window.SITE_CONFIG = {
   // Đổi thành link HTML / website thật của bạn.
-  connectUrl: "bonus.html?v=20261011-rose-ui",
+  connectUrl: "bonus.html?v=20261012-type",
 
   // Email hiển thị trên trang.
   ownerEmail: "kiotarot@gmail.com",

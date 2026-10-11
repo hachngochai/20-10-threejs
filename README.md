@@ -5,15 +5,15 @@ Website: https://hachngochai.github.io/20-10-threejs/
 ## Cập nhật GitHub Pages
 
 Repo triển khai: https://github.com/hachngochai/20-10-threejs
-Nhánh triển khai là `main`. GitHub Actions tự xuất bản bản mới khi push lên nhánh này.
+Nhánh triển khai là `master`. GitHub Actions tự xuất bản bản mới khi push lên nhánh này.
 Workflow chỉ đóng gói các file đang dùng; không đưa các bản cũ trong `dist/` và `js/dist/` lên Pages.
 
-Sau khi sửa website, chạy trong thư mục dự án:
+Sau khi sửa website, chạy trong checkout của repository `20-10-threejs`:
 
 ```powershell
-git add index.html bonus.html css js assets/photos piano.mp3 README.md
+git add index.html bonus.html css js assets/photos assets/fonts piano.mp3 README.md
 git commit -m "Update website"
-git push
+git push origin master
 ```
 
 Theo dõi quá trình xuất bản ở tab **Actions** của repo.
@@ -27,7 +27,9 @@ Trang quà đặc biệt giữ phong thư tương tác với chiều sâu bằng
 Một renderer Three.js dùng cho phòng chính; canvas được xóa trong suốt và dừng render
 khi mở nội dung để tiết kiệm tài nguyên.
 Box rơi của phòng 1 vẫn nằm trong vùng riêng dưới bức thư và có thể chạm để mở lời chúc.
-Giao diện dùng chữ Sans, bảng màu hồng, tím tối và kem, viền mảnh và bề mặt matte;
+Tiêu đề dùng Playfair Display với nét nghiêng ở câu nhấn; nội dung và nút bấm dùng Be Vietnam Pro.
+Font được lưu trong `assets/fonts/`, có đủ dấu tiếng Việt và giấy phép đi kèm.
+Giao diện giữ bảng màu hồng, tím tối và kem, viền mảnh và bề mặt matte;
 khung trang trí dày đã được bỏ để nội dung thoáng hơn.
 
 ## Chạy trên máy
@@ -50,6 +52,7 @@ và trình duyệt hỗ trợ WebGL2. Khi 3D không khả dụng, các nội dun
 - `js/room3d.js`: dựng phòng, ánh sáng, raycast, camera và vị trí nút trên vật thể.
 - `css/room3d.css`: giao diện phòng, thanh điều hướng và hiệu ứng chuyển cảnh.
 - `css/world3d.css`: bề mặt, chiều sâu và giao diện các phòng nội dung.
+- `css/fonts.css`, `css/typography.css`, `assets/fonts/`: font cục bộ và hệ chữ dùng chung.
 - `bonus.html`, `css/bonus3d.css`, `js/bonus.js`: căn phòng quà đặc biệt.
 - `js/app.js`: điều hướng, tiến trình 4/4, nhạc và hộp thoại.
 - `js/pages.js`: thư, album, lời nhắc, quà và gửi lời nhắn.
