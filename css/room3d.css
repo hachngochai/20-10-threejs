@@ -1,0 +1,605 @@
+/* The room stays usable while WebGL loads, and when WebGL is unavailable. */
+#room3dViewport {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  overflow: hidden;
+  isolation: isolate;
+  pointer-events: none;
+}
+
+#room3dViewport canvas {
+  display: block;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  transition: opacity 1.1s ease;
+  touch-action: pan-y;
+}
+
+.room-ui.has-room3d #room3dViewport {
+  pointer-events: auto;
+}
+
+.room-ui.has-room3d #room3dViewport canvas {
+  opacity: 1;
+}
+
+.room-ui.has-room3d::before,
+.room-ui.has-room3d::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 7;
+  pointer-events: none;
+}
+
+.room-ui.has-room3d::before {
+  background: linear-gradient(180deg, rgba(9, 5, 9, .72), rgba(9, 5, 9, .12) 29%, transparent 44%, transparent 62%, rgba(9, 5, 9, .68));
+}
+
+.room-ui.has-room3d::after {
+  background: linear-gradient(90deg, rgba(9, 5, 9, .3), transparent 29%, transparent 81%, rgba(9, 5, 9, .16));
+}
+
+.room-ui.has-room3d .room-scene {
+  display: none;
+}
+
+.room-ui.has-room3d .room-copy {
+  top: clamp(86px, 12vh, 125px);
+  left: clamp(28px, 4.3vw, 76px);
+  max-width: 300px;
+  z-index: 20;
+  pointer-events: none;
+  text-shadow: 0 3px 28px rgba(0, 0, 0, .4);
+}
+
+.room-ui.has-room3d .room-copy .kicker {
+  margin-bottom: 18px;
+  font-size: 8px;
+  letter-spacing: .24em;
+  color: #e6b3c9;
+}
+
+.room-ui.has-room3d .room-copy h2 {
+  margin-bottom: 17px;
+  font-size: clamp(48px, 4.8vw, 70px);
+  line-height: .88;
+  font-weight: 500;
+}
+
+.room-ui.has-room3d .room-copy > p:last-child {
+  max-width: 235px;
+  margin: 0;
+  font-size: 9px;
+  line-height: 1.9;
+  color: rgba(255, 238, 244, .6);
+}
+
+.room-ui.has-room3d .room-progress {
+  top: clamp(88px, 12vh, 127px);
+  right: clamp(28px, 4.3vw, 76px);
+  width: 145px;
+  padding: 15px 17px;
+  border-radius: 3px;
+  border-color: rgba(243, 203, 218, .15);
+  background: rgba(19, 10, 17, .32);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, .025);
+  backdrop-filter: blur(14px);
+  -webkit-backdrop-filter: blur(14px);
+  z-index: 20;
+  pointer-events: none;
+}
+
+.room-ui.has-room3d .room-progress > span {
+  font-size: 9px;
+  letter-spacing: .15em;
+  color: rgba(255, 238, 244, .7);
+}
+
+.room-ui.has-room3d .progress-track {
+  height: 2px;
+  margin-top: 12px;
+  background: rgba(255, 245, 240, .12);
+}
+
+#room3dHotspots {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  pointer-events: none;
+}
+
+.room3d-hotspot {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 44px;
+  min-height: 44px;
+  padding: 4px;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  pointer-events: none;
+  opacity: 0;
+  color: #fff2ee;
+  cursor: pointer;
+  -webkit-tap-highlight-color: transparent;
+  transition: opacity .35s, filter .3s;
+}
+
+.has-room3d .room3d-hotspot {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.room3d-hotspot .hotspot-number {
+  display: grid;
+  place-items: center;
+  position: relative;
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
+  border: 1px solid rgba(255, 228, 236, .63);
+  border-radius: 50%;
+  background: rgba(30, 14, 25, .68);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, .3), 0 0 20px rgba(243, 155, 195, .08);
+  font-size: 9px;
+  font-weight: 500;
+  letter-spacing: .03em;
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  transition: background .3s, border-color .3s, box-shadow .3s, scale .3s var(--ease);
+}
+
+.room3d-hotspot .hotspot-number::before {
+  content: "";
+  position: absolute;
+  inset: -5px;
+  border: 1px solid rgba(255, 228, 236, .12);
+  border-radius: inherit;
+  transition: border-color .3s, scale .3s;
+}
+
+.room3d-hotspot .hotspot-copy {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 50%;
+  padding: 8px 11px;
+  transform: translate(-50%, -4px);
+  opacity: 0;
+  border: 1px solid rgba(243, 203, 218, .16);
+  border-radius: 4px;
+  background: rgba(20, 10, 17, .9);
+  box-shadow: 0 5px 22px rgba(0, 0, 0, .2);
+  color: #fff1ee;
+  white-space: nowrap;
+  font-size: 8px;
+  line-height: 1.4;
+  letter-spacing: .06em;
+  pointer-events: none;
+  transition: opacity .25s, transform .3s var(--ease);
+}
+
+.room3d-hotspot .hotspot-copy strong {
+  display: block;
+  font-weight: 500;
+  font-size: 9px;
+}
+
+.room3d-hotspot .hotspot-copy small {
+  display: block;
+  margin-top: 3px;
+  color: rgba(255, 238, 244, .55);
+  font-size: 7px;
+  letter-spacing: .025em;
+}
+
+.room3d-hotspot:is(:hover, :focus-visible, .is-hovered, .is-active, .is-highlighted) {
+  z-index: 5;
+}
+
+.room3d-hotspot:is(:hover, :focus-visible, .is-hovered, .is-active, .is-highlighted) .hotspot-number {
+  scale: 1.12;
+  border-color: #ffece8;
+  background: rgba(125, 60, 91, .84);
+  box-shadow: 0 0 26px rgba(243, 155, 195, .27), 0 5px 18px rgba(0, 0, 0, .3);
+}
+
+.room3d-hotspot:is(:hover, :focus-visible, .is-hovered, .is-active, .is-highlighted) .hotspot-number::before {
+  border-color: rgba(255, 228, 236, .32);
+  scale: 1.08;
+}
+
+.room3d-hotspot:is(:hover, :focus-visible, .is-hovered, .is-active, .is-highlighted) .hotspot-copy {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+.room3d-hotspot:focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 4px;
+}
+
+.room3d-hotspot.visited .hotspot-number {
+  color: var(--gold, #edc9a0);
+  border-color: rgba(237, 201, 160, .64);
+}
+
+.room3d-hotspot.visited .hotspot-number::after {
+  content: "✓";
+  position: absolute;
+  right: -3px;
+  bottom: -2px;
+  display: grid;
+  place-items: center;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  background: #2a1820;
+  color: var(--gold, #edc9a0);
+  font-size: 8px;
+}
+
+.room3d-dock {
+  position: absolute;
+  left: 50%;
+  bottom: max(38px, calc(env(safe-area-inset-bottom) + 24px));
+  z-index: 35;
+  display: none;
+  gap: 4px;
+  width: min(660px, calc(100% - 48px));
+  padding: 7px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(241, 201, 218, .2);
+  border-radius: 12px;
+  background: linear-gradient(150deg, rgba(32, 17, 27, .82), rgba(17, 9, 15, .86));
+  box-shadow: 0 14px 55px rgba(0, 0, 0, .35), inset 0 1px 0 rgba(255, 243, 237, .04);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+}
+
+.has-room3d .room3d-dock {
+  display: flex;
+}
+
+.room3d-nav-item {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex: 1 1 0;
+  gap: 9px;
+  min-width: 0;
+  min-height: 44px;
+  padding: 10px 8px;
+  border: 1px solid transparent;
+  border-radius: 7px;
+  color: rgba(255, 243, 237, .73);
+  transition: color .25s, border-color .25s, background .25s;
+}
+
+.room3d-nav-item :is(.nav-number, .hotspot-number) {
+  color: #dba1bb;
+  font-size: 8px;
+  font-weight: 500;
+  letter-spacing: .02em;
+}
+
+.room3d-nav-item :is(.nav-label, .hotspot-copy) {
+  font-size: 9px;
+  font-weight: 400;
+  line-height: 1.35;
+  letter-spacing: .035em;
+}
+
+.room3d-nav-item:is(:hover, :focus-visible, .is-hovered, .is-highlighted) {
+  color: #fff5ef;
+  border-color: rgba(245, 184, 210, .18);
+  background: rgba(245, 184, 210, .07);
+}
+
+.room3d-nav-item.visited :is(.nav-number, .hotspot-number) {
+  color: var(--gold, #edc9a0);
+}
+
+.room3d-nav-item.visited::after {
+  content: "";
+  position: absolute;
+  left: 50%;
+  bottom: 3px;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: var(--gold, #edc9a0);
+  box-shadow: 0 0 8px rgba(237, 201, 160, .4);
+}
+
+.room3d-status {
+  position: absolute;
+  left: 50%;
+  bottom: 98px;
+  z-index: 25;
+  max-width: calc(100% - 40px);
+  padding: 12px 17px;
+  transform: translateX(-50%);
+  border: 1px solid rgba(243, 203, 218, .17);
+  border-radius: 999px;
+  background: rgba(26, 12, 22, .82);
+  color: rgba(255, 238, 244, .75);
+  font-size: 9px;
+  line-height: 1.8;
+  letter-spacing: .055em;
+  text-align: center;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  pointer-events: none;
+}
+
+.room3d-status:not(.is-fallback)::before {
+  content: "";
+  display: inline-block;
+  width: 5px;
+  height: 5px;
+  margin-right: 8px;
+  vertical-align: 1px;
+  border-radius: 50%;
+  background: #f6c4d6;
+  animation: roomStatusPulse 1.4s ease-in-out infinite;
+}
+
+.room3d-status.is-fallback {
+  bottom: 55px;
+  color: var(--muted);
+  font-size: 8px;
+  border-radius: 8px;
+}
+
+.room-ui.has-room3d .room-final-door {
+  right: clamp(24px, 4.3vw, 76px);
+  bottom: max(113px, calc(env(safe-area-inset-bottom) + 100px));
+  padding: 12px 17px;
+  font-size: 9px;
+}
+
+[data-page="hub"]:has(.has-room3d) .room-floor-tip {
+  bottom: max(14px, calc(env(safe-area-inset-bottom) + 5px));
+  z-index: 35;
+  color: rgba(255, 237, 244, .42);
+  font-size: 7px;
+  letter-spacing: .13em;
+  white-space: nowrap;
+  pointer-events: none;
+}
+
+/* A soft bloom hides the page swap at the middle of the camera movement. */
+#transition.room-transition {
+  --transition-x: 50%;
+  --transition-y: 50%;
+  opacity: 0;
+  visibility: hidden;
+  transform: none;
+  transform-origin: center;
+  background: radial-gradient(ellipse at var(--transition-x) var(--transition-y), rgba(117, 53, 83, .54), rgba(39, 16, 31, .96) 45%, #0c060b 80%);
+}
+
+#transition.room-transition::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at var(--transition-x) var(--transition-y), rgba(249, 211, 225, .17), transparent 38%);
+}
+
+#transition.room-transition.play {
+  visibility: visible;
+  animation: roomBloom .9s cubic-bezier(.42, 0, .2, 1) both;
+}
+
+body.is-navigating #app {
+  pointer-events: none;
+}
+
+.screen.is-leaving {
+  animation: roomScreenOut .45s cubic-bezier(.42, 0, .2, 1) both;
+  transform-origin: var(--transition-x, 50%) var(--transition-y, 50%);
+}
+
+.screen.is-arriving {
+  animation: roomScreenIn .65s var(--ease) both;
+  transform-origin: center;
+}
+
+.screen:is(.is-leaving, .is-arriving) :is(.room-ui, .letter-layout, .memory-page, .care-page, .thanks-page, .gift-page, .connect-page, .final-page) {
+  animation: none;
+}
+
+body.leaving-room .room3d-dock,
+body.leaving-room .room-copy,
+body.leaving-room .room-progress {
+  opacity: 0;
+  transition: opacity .25s ease;
+}
+
+@keyframes roomBloom {
+  0% { opacity: 0; }
+  43%, 56% { opacity: 1; }
+  100% { opacity: 0; }
+}
+
+@keyframes roomScreenOut {
+  from { opacity: 1; transform: scale(1); filter: blur(0); }
+  to { opacity: 0; transform: scale(1.018); filter: blur(4px); }
+}
+
+@keyframes roomScreenIn {
+  from { opacity: 0; transform: scale(1.025); filter: blur(3px); }
+  to { opacity: 1; transform: scale(1); filter: blur(0); }
+}
+
+@keyframes roomStatusPulse {
+  0%, 100% { opacity: .4; box-shadow: 0 0 0 0 rgba(246, 196, 214, .1); }
+  50% { opacity: 1; box-shadow: 0 0 0 4px rgba(246, 196, 214, .06); }
+}
+
+@media (max-width: 980px) {
+  .room-ui.has-room3d .room-copy {
+    left: 5vw;
+    top: 88px;
+    max-width: 235px;
+  }
+  .room-ui.has-room3d .room-copy h2 {
+    font-size: 54px;
+  }
+  .room-ui.has-room3d .room-progress {
+    top: 90px;
+    right: 5vw;
+    width: 126px;
+    padding: 12px 14px;
+  }
+}
+
+@media (max-width: 620px) {
+  .room-ui.has-room3d::before {
+    background: linear-gradient(180deg, rgba(9, 5, 9, .75), rgba(9, 5, 9, .1) 31%, transparent 42%, transparent 68%, rgba(9, 5, 9, .82));
+  }
+  .room-ui.has-room3d .room-copy {
+    left: 20px;
+    top: 84px;
+    max-width: 210px;
+  }
+  .room-ui.has-room3d .room-copy .kicker {
+    margin-bottom: 13px;
+    font-size: 7px;
+    letter-spacing: .18em;
+  }
+  .room-ui.has-room3d .room-copy h2 {
+    margin-bottom: 12px;
+    font-size: clamp(36px, 10vw, 44px);
+    line-height: .9;
+  }
+  .room-ui.has-room3d .room-copy > p:last-child {
+    max-width: 190px;
+    font-size: 8px;
+    line-height: 1.7;
+  }
+  .room-ui.has-room3d .room-progress {
+    right: 20px;
+    top: 88px;
+    width: 79px;
+    padding: 10px;
+  }
+  .room-ui.has-room3d .room-progress > span {
+    font-size: 8px;
+    letter-spacing: .1em;
+  }
+  .room-ui.has-room3d .progress-track {
+    margin-top: 8px;
+  }
+  .room3d-dock {
+    bottom: max(36px, calc(env(safe-area-inset-bottom) + 22px));
+    width: calc(100% - 28px);
+    padding: 5px;
+    gap: 2px;
+    border-radius: 10px;
+  }
+  .room3d-nav-item {
+    flex-direction: column;
+    gap: 5px;
+    padding: 8px 3px;
+    min-height: 48px;
+  }
+  .room3d-nav-item :is(.nav-number, .hotspot-number) {
+    font-size: 7px;
+  }
+  .room3d-nav-item :is(.nav-label, .hotspot-copy) {
+    font-size: 8px;
+    letter-spacing: 0;
+  }
+  .room3d-hotspot .hotspot-number {
+    width: 36px;
+    height: 36px;
+  }
+  .room3d-hotspot .hotspot-copy {
+    display: none;
+  }
+  .room-ui.has-room3d .room-final-door {
+    right: 16px;
+    bottom: max(110px, calc(env(safe-area-inset-bottom) + 97px));
+    font-size: 8px;
+    padding: 11px 14px;
+  }
+  [data-page="hub"]:has(.has-room3d) .room-floor-tip {
+    font-size: 6px;
+    letter-spacing: .04em;
+  }
+  .room3d-status {
+    width: max-content;
+    font-size: 8px;
+    padding: 10px 14px;
+  }
+}
+
+.screen :is(h1, h2)[tabindex="-1"]:focus {
+  outline: none;
+}
+
+@media (max-height: 600px) and (max-width: 620px) {
+  .room-ui.has-room3d .room-copy {
+    top: 76px;
+    max-width: 175px;
+  }
+  .room-ui.has-room3d .room-copy h2 {
+    font-size: 32px;
+  }
+  .room-ui.has-room3d .room-copy .kicker {
+    margin-bottom: 11px;
+  }
+  .room-ui.has-room3d .room-progress {
+    top: 78px;
+  }
+}
+
+@media (max-height: 600px) and (min-width: 621px) {
+  .room-ui.has-room3d .room-copy {
+    top: 76px;
+  }
+  .room-ui.has-room3d .room-copy h2 {
+    font-size: 46px;
+  }
+  .room-ui.has-room3d .room-copy > p:last-child {
+    display: none;
+  }
+  .room-ui.has-room3d .room-progress {
+    top: 77px;
+  }
+  .room3d-dock {
+    bottom: 29px;
+  }
+  .room-ui.has-room3d .room-final-door {
+    bottom: 100px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  #room3dViewport canvas,
+  .room3d-hotspot,
+  .room3d-hotspot *,
+  .room3d-nav-item {
+    transition: none;
+  }
+  #transition.room-transition.play {
+    animation: none;
+    opacity: 0;
+    visibility: hidden;
+  }
+  .screen.is-leaving,
+  .screen.is-arriving {
+    animation: none;
+    transform: none;
+    filter: none;
+  }
+  .room3d-status::before {
+    animation: none !important;
+  }
+}

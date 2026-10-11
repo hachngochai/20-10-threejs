@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="theme-color" content="#090509">
+  <title>Quà đặc biệt · Room 3D</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600;700&family=Montserrat:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/bonus3d.css?v=20261011-rose-ui">
+</head>
+<body class="bonus-3d">
+  <header class="bonus-header">
+    <a href="index.html" class="bonus-back">← Căn phòng 20/10</a>
+    <span>ONE MORE LITTLE MAGIC</span>
+  </header>
+  <main class="screen active" data-page="bonus" id="bonusRoom">
+    <div id="room3dViewport" class="room3d-viewport" data-room-renderer="pending">
+      <div id="room3dHotspots" hidden></div>
+    </div>
+    <div class="bonus-copy">
+      <p class="bonus-kicker">MỘT MÓN QUÀ ĐẶC BIỆT</p>
+      <h1>Gửi người đẹp nhất<br><em>hôm nay.</em></h1>
+      <p>Có một lời chúc nhỏ bên trong.<br>Chạm phong thư để mở nhé.</p>
+    </div>
+    <div class="bonus-envelope-stage">
+      <div class="bonus-plinth" aria-hidden="true"></div>
+      <button class="bonus-envelope" id="openBonus" type="button" aria-label="Mở phong thư đặc biệt" aria-haspopup="dialog" aria-controls="bonusLetter">
+        <span class="envelope-back" aria-hidden="true"></span>
+        <span class="envelope-paper" aria-hidden="true">Happy<br>Women's Day!<i>20 · 10</i></span>
+        <span class="envelope-front" aria-hidden="true"></span>
+        <span class="envelope-flap" aria-hidden="true"></span>
+        <span class="envelope-seal" aria-hidden="true">♡</span>
+      </button>
+      <span class="bonus-envelope-caption">MỘT LỜI NHỎ, NHƯNG THẬT LÒNG</span>
+    </div>
+    <p id="room3dStatus" class="bonus-status" role="status" aria-live="polite" hidden></p>
+    <div class="bonus-sparkles" id="bonusSparkles" aria-hidden="true"></div>
+  </main>
+  <div class="bonus-modal" id="bonusLetter" role="dialog" aria-modal="true" aria-labelledby="bonusLetterTitle" hidden>
+    <article class="bonus-letter">
+      <button id="closeBonus" class="bonus-close" type="button" aria-label="Đóng lời chúc">×</button>
+      <p class="bonus-kicker">20 · 10 · 2026</p>
+      <div class="bonus-flower" aria-hidden="true">✿</div>
+      <h2 id="bonusLetterTitle">Gửi người đẹp nhất<br><em>hôm nay!</em></h2>
+      <p id="bonusWish">Hôm nay nhân ngày 20/10 chúc bạn luôn hạnh phúc và gặp nhiều may mắn trong cuộc sống! Hãy luôn giữ mãi nụ cười trên môi nhé và làm những điều mình thích. Có quyền ăn thật ngon, mặc thật đẹp và luôn yêu thương bản thân mình nhé!</p>
+      <div class="bonus-signature">With love, <strong>Kio ♡</strong></div>
+    </article>
+  </div>
+  <script src="js/bonus.js?v=20261011-world3d"></script>
+  <script src="js/room3d-loader.js?v=20261011-rose-ui"></script>
+</body>
+</html>
