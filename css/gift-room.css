@@ -1,0 +1,307 @@
+/* Room 04: an airy gift collection in the original rose and cream palette. */
+body [data-page="surprise"] .gift-page {
+  --content-top: 118px;
+  --content-gutter: clamp(24px, 6vw, 96px);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding-bottom: max(40px, calc(env(safe-area-inset-bottom) + 28px));
+}
+
+body [data-page="surprise"] .gift-title {
+  width: min(760px, 100%);
+  padding: 0;
+  margin: 0 auto;
+  border: 0;
+  border-radius: 0;
+  background: transparent;
+  box-shadow: none;
+  text-align: center;
+}
+
+body [data-page="surprise"] .gift-title .kicker {
+  margin: 0 0 14px;
+  color: var(--pink);
+  font-size: 10px;
+  font-weight: 500;
+  line-height: 1.8;
+  letter-spacing: .2em;
+}
+
+body [data-page="surprise"] .gift-title h2 {
+  margin: 0 0 13px;
+  font-size: clamp(42px, 3.7vw, 54px);
+  font-weight: 500;
+  line-height: 1.19;
+  letter-spacing: -.035em;
+}
+
+body [data-page="surprise"] .gift-title h2 em {
+  color: var(--pink);
+}
+
+body [data-page="surprise"] .gift-title > p:last-child {
+  max-width: 440px;
+  margin: 0 auto;
+  color: #d7bdcc;
+  font-size: 14px;
+  line-height: 1.85;
+}
+
+body [data-page="surprise"] .gifts {
+  width: min(980px, 100%);
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 18px;
+  margin: 30px auto 24px;
+}
+
+body [data-page="surprise"] .gift-tile {
+  min-width: 0;
+  min-height: 178px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 22px 18px 20px;
+  border: 1px solid rgba(243, 155, 195, .13);
+  border-radius: 28px;
+  background: linear-gradient(150deg, rgba(86, 39, 68, .42), rgba(39, 18, 33, .74));
+  box-shadow: inset 0 1px 0 rgba(255, 236, 242, .045), 0 12px 32px rgba(8, 3, 8, .13);
+  transform: none;
+  transition: transform .4s var(--ease), border-color .35s, background .35s, box-shadow .35s;
+}
+
+body [data-page="surprise"] .gift-tile::before {
+  display: none;
+}
+
+body [data-page="surprise"] .gift-tile::after {
+  background: radial-gradient(circle at var(--shine-x, 50%) var(--shine-y, 50%), rgba(243, 155, 195, .075), transparent 70%);
+}
+
+body [data-page="surprise"] .gift-art {
+  width: 58px;
+  height: 58px;
+  display: grid;
+  place-items: center;
+  flex-shrink: 0;
+  margin: 0 0 15px;
+  border: 1px solid rgba(243, 155, 195, .09);
+  border-radius: 50%;
+  background: radial-gradient(circle at 35% 25%, rgba(243, 155, 195, .13), rgba(243, 155, 195, .035));
+  color: #f6b2cf;
+  font-size: 29px;
+  line-height: 1;
+  text-shadow: none;
+  translate: none;
+  rotate: none;
+  transition: translate .4s var(--ease), background .35s, color .35s;
+}
+
+body [data-page="surprise"] .gift-art.heart { font-size: 34px; }
+body [data-page="surprise"] .gift-art.letter { font-size: 27px; }
+
+body [data-page="surprise"] .gift-tile strong {
+  display: block;
+  max-width: 100%;
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -.025em;
+  text-wrap: balance;
+}
+
+body [data-page="surprise"] .gift-tile small {
+  margin-top: 5px;
+  color: #c6a5ba;
+  font-size: 10px;
+  font-weight: 400;
+  line-height: 1.7;
+  letter-spacing: .08em;
+}
+
+body [data-page="surprise"] .gift-tile.is-opened {
+  border-color: rgba(237, 201, 160, .26);
+  background: linear-gradient(150deg, rgba(91, 51, 62, .43), rgba(43, 24, 34, .77));
+}
+
+body [data-page="surprise"] .gift-tile.is-opened .gift-art {
+  border-color: rgba(237, 201, 160, .12);
+  background: radial-gradient(circle at 35% 25%, rgba(237, 201, 160, .13), rgba(237, 201, 160, .035));
+  color: var(--gold);
+}
+
+body [data-page="surprise"] .gift-tile.is-opened small { color: var(--gold); }
+
+body [data-page="surprise"] .connect-door {
+  width: min(980px, 100%);
+  min-height: 82px;
+  margin: 0 auto;
+  gap: 24px;
+  padding: 18px 26px;
+  border: 1px solid rgba(243, 155, 195, .17);
+  border-radius: 25px;
+  background: linear-gradient(110deg, rgba(78, 33, 60, .52), rgba(39, 18, 33, .6));
+  box-shadow: none;
+  transition: transform .35s var(--ease), border-color .35s, background .35s;
+}
+
+body [data-page="surprise"] .connect-door span {
+  margin-bottom: 4px;
+  color: #e5a5c2;
+  font-size: 9px;
+  line-height: 1.7;
+  letter-spacing: .14em;
+}
+
+body [data-page="surprise"] .connect-door strong {
+  display: block;
+  color: var(--cream);
+  font-family: var(--font-display);
+  font-size: 23px;
+  font-weight: 500;
+  line-height: 1.4;
+  letter-spacing: -.02em;
+}
+
+body [data-page="surprise"] .connect-door b {
+  width: 42px;
+  height: 42px;
+  flex-shrink: 0;
+  display: grid;
+  place-items: center;
+  border-radius: 50%;
+  background: rgba(243, 155, 195, .085);
+  color: var(--pink);
+  font-size: 22px;
+  font-weight: 400;
+}
+
+body [data-page="surprise"] :is(.gift-tile, .connect-door):focus-visible {
+  outline: 2px solid var(--pink);
+  outline-offset: 4px;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  body [data-page="surprise"] .gift-tile:is(:hover, :focus-visible) {
+    transform: translateY(-4px);
+    border-color: rgba(243, 155, 195, .32);
+    background: linear-gradient(150deg, rgba(104, 48, 80, .5), rgba(45, 20, 38, .8));
+    box-shadow: inset 0 1px 0 rgba(255, 236, 242, .055), 0 18px 38px rgba(8, 3, 8, .18);
+  }
+
+  body [data-page="surprise"] .gift-tile.is-tilting {
+    transform: perspective(1000px) translateY(-4px) rotateX(calc(var(--tilt-x, 0deg) * .3)) rotateY(calc(var(--tilt-y, 0deg) * .3));
+    transition: transform .12s ease-out, border-color .35s, background .35s, box-shadow .35s;
+  }
+
+  body [data-page="surprise"] .gift-tile:is(:hover, :focus-visible) .gift-art {
+    translate: 0 -3px;
+    rotate: none;
+  }
+
+  body [data-page="surprise"] .connect-door:is(:hover, :focus-visible) {
+    transform: translateY(-2px);
+    border-color: rgba(243, 155, 195, .34);
+    background: linear-gradient(110deg, rgba(93, 39, 71, .56), rgba(45, 20, 37, .65));
+  }
+}
+
+@media (max-width: 760px) {
+  body [data-page="surprise"] .gift-page {
+    --content-top: 116px;
+    --content-gutter: 24px;
+  }
+
+  body [data-page="surprise"] .gift-title h2 {
+    font-size: clamp(35px, 6.4vw, 46px);
+    line-height: 1.23;
+  }
+
+  body [data-page="surprise"] .gifts {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 14px;
+    margin-top: 28px;
+  }
+
+  body [data-page="surprise"] .gift-tile { min-height: 174px; }
+}
+
+@media (max-width: 480px) {
+  body [data-page="surprise"] .gift-page {
+    --content-gutter: 20px;
+  }
+
+  body [data-page="surprise"] .gift-title .kicker {
+    margin-bottom: 12px;
+    font-size: 9px;
+    letter-spacing: .17em;
+  }
+
+  body [data-page="surprise"] .gift-title h2 {
+    font-size: clamp(31px, 8.8vw, 40px);
+    line-height: 1.25;
+    margin-bottom: 13px;
+  }
+
+  body [data-page="surprise"] .gift-title > p:last-child {
+    max-width: 290px;
+    font-size: 13px;
+    line-height: 1.85;
+  }
+
+  body [data-page="surprise"] .gifts {
+    gap: 12px;
+    margin: 26px auto 20px;
+  }
+
+  body [data-page="surprise"] .gift-tile {
+    min-height: 166px;
+    padding: 19px 10px 17px;
+    border-radius: 23px;
+  }
+
+  body [data-page="surprise"] .gift-art {
+    width: 50px;
+    height: 50px;
+    margin-bottom: 13px;
+    font-size: 26px;
+  }
+
+  body [data-page="surprise"] .gift-art.heart { font-size: 30px; }
+  body [data-page="surprise"] .gift-art.letter { font-size: 24px; }
+  body [data-page="surprise"] .gift-tile strong { font-size: 19px; line-height: 1.42; }
+  body [data-page="surprise"] .gift-tile small { font-size: 10px; letter-spacing: .035em; }
+
+  body [data-page="surprise"] .connect-door {
+    min-height: 90px;
+    gap: 14px;
+    padding: 17px 18px;
+    border-radius: 23px;
+  }
+
+  body [data-page="surprise"] .connect-door strong { font-size: 20px; line-height: 1.4; }
+  body [data-page="surprise"] .connect-door b { width: 36px; height: 36px; font-size: 20px; }
+}
+
+@media (max-width: 360px) {
+  body [data-page="surprise"] .gift-page { --content-gutter: 16px; }
+  body [data-page="surprise"] .gift-title h2 { font-size: 29px; }
+  body [data-page="surprise"] .gifts { gap: 10px; }
+  body [data-page="surprise"] .gift-tile { min-height: 173px; padding-inline: 8px; }
+  body [data-page="surprise"] .gift-tile strong { font-size: 18px; }
+}
+
+@media (hover: none), (pointer: coarse) {
+  body [data-page="surprise"] :is(.gift-tile, .connect-door):is(:hover, .is-tilting) { transform: none; }
+  body [data-page="surprise"] .gift-tile:hover .gift-art { translate: none; rotate: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  body [data-page="surprise"] :is(.gift-tile, .connect-door, .gift-art) { transition: none; }
+  body [data-page="surprise"] :is(.gift-tile, .connect-door):is(:hover, :focus-visible, .is-tilting) { transform: none; }
+  body [data-page="surprise"] .gift-tile:is(:hover, :focus-visible) .gift-art { translate: none; rotate: none; }
+}
