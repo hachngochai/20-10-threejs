@@ -7,6 +7,12 @@ Website: https://hachngochai.github.io/20-10-threejs/
 Repo triển khai: https://github.com/hachngochai/20-10-threejs
 Nhánh triển khai là `master`. GitHub Actions tự xuất bản bản mới khi push lên nhánh này.
 Workflow chỉ đóng gói các file đang dùng; không đưa các bản cũ trong `dist/` và `js/dist/` lên Pages.
+Repository công khai chứa JS đã làm rối và CSS đã nén. Bản nguồn dễ chỉnh sửa và
+`tools/build-publish.cjs` được giữ trên máy; tạo bản xuất bản mới từ nguồn đó trước khi push.
+Source map và các bản `dist` cũ được loại khỏi bản công khai. Việc làm rối giúp code khó đọc
+hơn, không chặn tải file; những commit cũ vẫn có thể được xem trong lịch sử GitHub.
+Font DFVN Pencerio được tải nguyên bản và kiểm tra SHA256 trong bước deploy Pages,
+không đưa file font này vào repository công khai.
 
 Sau khi sửa website, chạy trong checkout của repository `20-10-threejs`:
 
@@ -27,8 +33,9 @@ Trang quà đặc biệt giữ phong thư tương tác với chiều sâu bằng
 Một renderer Three.js dùng cho phòng chính; canvas được xóa trong suốt và dừng render
 khi mở nội dung để tiết kiệm tài nguyên.
 Box rơi của phòng 1 vẫn nằm trong vùng riêng dưới bức thư và có thể chạm để mở lời chúc.
-Tiêu đề dùng Playfair Display với nét nghiêng ở câu nhấn; nội dung và nút bấm dùng Be Vietnam Pro.
-Font được lưu trong `assets/fonts/`, có đủ dấu tiếng Việt và giấy phép đi kèm.
+Tiêu đề và chữ ký dùng DFVN Pencerio viết tay đã Việt hóa; nội dung dài và nút bấm dùng Be Vietnam Pro.
+Pencerio Việt hóa dùng nguyên file OTF của DFVN, đã kiểm tra đầy đủ ký tự tiếng Việt và dấu thanh.
+Font được lưu trong `assets/fonts/`; nguồn và điều khoản sử dụng được ghi trong README của thư mục này.
 Giao diện giữ bảng màu hồng, tím tối và kem, viền mảnh và bề mặt matte;
 khung trang trí dày đã được bỏ để nội dung thoáng hơn.
 
@@ -55,6 +62,7 @@ và trình duyệt hỗ trợ WebGL2. Khi 3D không khả dụng, các nội dun
 - `css/fonts.css`, `css/typography.css`, `assets/fonts/`: font cục bộ và hệ chữ dùng chung.
 - `css/memory-desktop.css`: bố cục album phòng 2 rộng hơn trên PC, áp dụng từ 1101px.
 - `css/gift-room.css`: tiêu đề thoáng, box quà bo mềm và bố cục phòng 4 trên PC/mobile.
+- `css/handwriting.css`: tiêu đề Pencerio và chữ ký viết tay, khoảng cách riêng cho từng kích thước màn hình.
 - `bonus.html`, `css/bonus3d.css`, `js/bonus.js`: căn phòng quà đặc biệt.
 - `js/app.js`: điều hướng, tiến trình 4/4, nhạc và hộp thoại.
 - `js/pages.js`: thư, album, lời nhắc, quà và gửi lời nhắn.

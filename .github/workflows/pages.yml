@@ -31,11 +31,30 @@ jobs:
           set -euo pipefail
           mkdir -p _site/css _site/js/vendor/three _site/assets/photos _site/assets/fonts
           cp index.html bonus.html piano.mp3 .nojekyll _site/
-          cp css/{global,pages,room3d,world3d,bonus3d,fonts,typography,memory-desktop,gift-room}.css _site/css/
+          cp css/{global,pages,room3d,world3d,bonus3d,fonts,typography,memory-desktop,gift-room,handwriting}.css _site/css/
           cp js/{config,app,pages,room3d,room3d-loader,bonus}.js _site/js/
           cp js/vendor/three/{three.module.js,three.core.js,LICENSE,README.md} _site/js/vendor/three/
           cp assets/photos/memory-*.jpg _site/assets/photos/
           cp assets/fonts/* _site/assets/fonts/
+      - name: Load the Vietnamese handwriting font for this website
+        shell: bash
+        run: |
+          set -euo pipefail
+          curl --fail --location --retry 3 --max-time 90 \
+            'https://drive.google.com/uc?export=download&id=1PRckYNuEjAYpBS49yBSd1BWVOWMMiTCv' \
+            --output "$RUNNER_TEMP/dfvn-pencerio.zip"
+          python3 - "$RUNNER_TEMP/dfvn-pencerio.zip" <<'PY'
+          import hashlib, pathlib, sys, zipfile
+          with zipfile.ZipFile(sys.argv[1]) as archive:
+              fonts = [name for name in archive.namelist() if name.lower().endswith('.otf')]
+              if len(fonts) != 1:
+                  raise SystemExit('Expected the original DFVN Pencerio OTF.')
+              data = archive.read(fonts[0])
+          expected = 'f0234918bf395e5c73d185fb40749a40f0aed877391b24e0ceafe3a8f13345b6'
+          if hashlib.sha256(data).hexdigest() != expected:
+              raise SystemExit('The publisher font changed; verify it before publishing.')
+          pathlib.Path('_site/assets/fonts/dfvn-pencerio-hairline.otf').write_bytes(data)
+          PY
       - name: Upload website
         uses: actions/upload-pages-artifact@v3
         with:
